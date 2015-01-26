@@ -1077,19 +1077,26 @@ class SquareSignal(Sinusoid):
 
 
 class SawtoothSignal(Sinusoid):
-    """Represents a sawtooth signal."""
-    
-    def evaluate(self, ts):
-        """Evaluates the signal at the given times.
-
-        ts: float array of times
-        
-        returns: float wave array
-        """
-        cycles = self.freq * ts + self.offset / PI2
+    def evaluate(self,ts):
+        cycles = ts * self.freq + self.offset/PI2
         frac, _ = numpy.modf(cycles)
-        ys = normalize(unbias(frac), self.amp)
+        ys = normalize(unbias(frac),self.amp)
         return ys
+
+# class SawtoothSignal(Sinusoid):
+#     """Represents a sawtooth signal."""
+    
+#     def evaluate(self, ts):
+#         """Evaluates the signal at the given times.
+
+#         ts: float array of times
+        
+#         returns: float wave array
+#         """
+#         cycles = self.freq * ts + self.offset / PI2
+#         frac, _ = numpy.modf(cycles)
+#         ys = normalize(unbias(frac), self.amp)
+#         return ys
 
 
 class ParabolicSignal(Sinusoid):
